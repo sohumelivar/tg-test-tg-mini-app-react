@@ -67,20 +67,18 @@ const products = [
 ];
 
 const getTotalPrice = (items) => {
-  return items.reduce((acc, item) => {
-    return acc += item.price;
-  }, 0)
+  return items.reduce((acc, item) => acc + item.price, 0);
 }
 
 export default function ProductList() {
   const [addedItems, setAddedItems] = useState([]);
-  const {tg} = useTelegram();
+  const { tg } = useTelegram();
 
   const onAdd = (product) => {
     const alreadyAdded = addedItems.find(item => item.id === product.id);
     let newItems = [];
 
-    if(alreadyAdded) {
+    if (alreadyAdded) {
       newItems = addedItems.filter(item => item.id !== product.id);
     } else {
       newItems = [...addedItems, product];
@@ -88,26 +86,26 @@ export default function ProductList() {
 
     setAddedItems(newItems);
 
-    if(newItems,length === 0) {
+    if (newItems.length === 0) {
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
         text: `Купить ${getTotalPrice(newItems)}`
-      })
+      });
     }
   };
 
   return (
-    <div className={'list'}>
-        {products.map(item => {
-          <ProductItem
-            key={item.id}
-            product={item}
-            onAdd={onAdd}
-            className={'item'}
-          />
-        })}
+    <div className="list">
+      {products.map(item => (
+        <ProductItem
+          key={item.id}
+          product={item}
+          onAdd={onAdd}
+          className="item"
+        />
+      ))}
     </div>
-  )
+  );
 }
