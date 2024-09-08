@@ -17,6 +17,7 @@ function App() {
   return (
     <div className="App">
         <Header />
+        <input placeholder='eбаный фильтр! нажимай !'/>
         <Routes>
           <Route index element={<ProductList />} />
           <Route path={'form'} element={<Form />} />
