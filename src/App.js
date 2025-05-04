@@ -7,6 +7,35 @@ import ProductList from './components/ProductList/ProductList';
 import Form from './components/Form/Form';
 
 function App() {
+
+  const createICSFile = () => {
+    const event = `
+    BEGIN:VCALENDAR
+    VERSION:2.0
+    BEGIN:VEVENT
+    SUMMARY:Встреча с командой
+    DTSTART:20250505T120000Z
+    DTEND:20250505T130000Z
+    DESCRIPTION:Обсуждение проекта Market
+    LOCATION:Zoom
+    END:VEVENT
+    END:VCALENDAR`;
+
+    const blob = new Blob([event.trim()], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'event.ics';
+    link.click();
+    URL.revokeObjectURL(url); // освобождаем память
+  };
+
+
+
+
+
+
+
   const { tg } = useTelegram();
   const [userData, setUserData] = useState(null);
   const [showUserInfo, setShowUserInfo] = useState(false);
@@ -22,8 +51,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <input placeholder='еbanый фильтр! нажимай!' />
-
+      <div style={{ padding: '2rem' }}>
+      <h1>Создать событие в календаре</h1>
+      <button onClick={createICSFile}>Добавить в календарь</button>
+      </div>
       <button onClick={() => setShowUserInfo(true)}>Показать информацию о пользователе</button>
 
       {showUserInfo && userData && (
