@@ -32,7 +32,7 @@ function App() {
           padding: '16px',
           border: '1px solid #ccc',
           borderRadius: '8px',
-          backgroundColor: '#f9f9f9',
+          backgroundColor: '#000000',
         }}>
           <h3>Информация о пользователе:</h3>
           <p><strong>Имя:</strong> {userData.first_name} {userData.last_name}</p>
