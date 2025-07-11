@@ -56,6 +56,9 @@ function App() {
       <button onClick={createICSFile}>Добавить в календарь</button>
       </div>
       <button onClick={() => setShowUserInfo(true)}>Показать информацию о пользователе</button>
+      <a href="tg://user?id=797017508">Связаться</a>
+
+
 
       {showUserInfo && userData && (
         <div style={{
